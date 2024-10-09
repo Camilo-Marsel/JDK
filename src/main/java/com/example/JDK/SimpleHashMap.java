@@ -16,7 +16,7 @@ public class SimpleHashMap {
             hashmap.put(i, new ArrayList<>());
         }
     }
-
+    // aqui nota organizar la funcion
     // Hash function to determine the bucket index for a given string
     // This is a simple hash function for demonstration purposes.
     private static int hashFunction(String key) {
@@ -47,7 +47,7 @@ public class SimpleHashMap {
             System.out.println("Bucket " + bucketIndex + ": " + (hashmap.get(bucketIndex).isEmpty() ? "Empty" : "Contains items"));
         }
     }
-
+    // aqui toca poner que lea los registros del json
     public static void main(String[] args) {
         // Add values to the hashmap
         addToHashmap("apple");
