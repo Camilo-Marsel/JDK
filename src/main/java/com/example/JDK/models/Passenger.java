@@ -1,42 +1,51 @@
 package com.example.JDK.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Passenger {
 
-    private String id;
+    private String _id;
     private String name;
     private String surname;
     private int age;
     private String gender;
-    private String familyIde;
+    private int familyID;
     private String civilStatus;
     private int children;
-    private int tripAchieved;
+    private int tripsAchieved;
     private double salary;
 
-    // Constructor
-    public Passenger(String id, String name, String surname, int age, String gender, String familyIde,
-                  String civilStatus, int children, int tripAchieved, double salary) {
-        this.id = id;
+    // Constructor por defecto (obligatorio para Jackson)
+    public Passenger() {
+    }
+
+    // Constructor con todos los parámetros (opcional, pero útil)
+    public Passenger(String _id, String name, String surname, int age, String gender, int familyID,
+                     String civilStatus, int children, int tripsAchieved, double salary) {
+        this._id = _id;
         this.name = name;
         this.surname = surname;
         this.age = age;
         this.gender = gender;
-        this.familyIde = familyIde;
+        this.familyID = familyID;
         this.civilStatus = civilStatus;
         this.children = children;
-        this.tripAchieved = tripAchieved;
+        this.tripsAchieved = tripsAchieved;
         this.salary = salary;
     }
 
-    // Getters and Setters
+    // Getters y Setters
+
+    @JsonProperty("_id")
     public String getId() {
-        return id;
+        return _id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String _id) {
+        this._id = _id;
     }
 
+    @JsonProperty("Name")
     public String getName() {
         return name;
     }
@@ -45,6 +54,7 @@ public class Passenger {
         this.name = name;
     }
 
+    @JsonProperty("Surname")
     public String getSurname() {
         return surname;
     }
@@ -53,6 +63,7 @@ public class Passenger {
         this.surname = surname;
     }
 
+    @JsonProperty("Age")
     public int getAge() {
         return age;
     }
@@ -61,6 +72,7 @@ public class Passenger {
         this.age = age;
     }
 
+    @JsonProperty("Gender")
     public String getGender() {
         return gender;
     }
@@ -69,14 +81,16 @@ public class Passenger {
         this.gender = gender;
     }
 
-    public String getfamilyIde() {
-        return familyIde;
+    @JsonProperty("FamilyID")
+    public int getFamilyID() {
+        return familyID;
     }
 
-    public void setfamilyIde(String family) {
-        this.familyIde = familyIde;
+    public void setFamilyID(int familyID) {
+        this.familyID = familyID;
     }
 
+    @JsonProperty("CivilStatus")
     public String getCivilStatus() {
         return civilStatus;
     }
@@ -85,6 +99,7 @@ public class Passenger {
         this.civilStatus = civilStatus;
     }
 
+    @JsonProperty("Children")
     public int getChildren() {
         return children;
     }
@@ -93,14 +108,16 @@ public class Passenger {
         this.children = children;
     }
 
-    public int isTripAchieved() {
-        return tripAchieved;
+    @JsonProperty("TripsAchieved")
+    public int getTripsAchieved() {
+        return tripsAchieved;
     }
 
-    public void setTripAchieved(int tripAchieved) {
-        this.tripAchieved = tripAchieved;
+    public void setTripsAchieved(int tripsAchieved) {
+        this.tripsAchieved = tripsAchieved;
     }
 
+    @JsonProperty("Salary")
     public double getSalary() {
         return salary;
     }
@@ -109,21 +126,10 @@ public class Passenger {
         this.salary = salary;
     }
 
-    // Sobrescribir el método toString()
+
     @Override
     public String toString() {
-        return "Person{" +
-                "ID='" + id + '\'' +
-                ", Name='" + name + '\'' +
-                ", Surname='" + surname + '\'' +
-                ", Age=" + age +
-                ", Gender='" + gender + '\'' +
-                ", Family='" + familyIde + '\'' +
-                ", Civil Status='" + civilStatus + '\'' +
-                ", Children=" + children +
-                ", Trip Achieved=" + tripAchieved + '\'' +
-                ", Salary=$" + salary +
-                '}';
+        return Integer.toString(this.familyID);  // Aquí puedes ajustar la representación que prefieras, por ejemplo, agregar apellido u otros campos.
     }
 }
 
