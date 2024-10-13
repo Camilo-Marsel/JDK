@@ -1,5 +1,7 @@
 package com.example.JDK;
 
+import java.util.Collections;
+import java.util.Comparator;
 import com.example.JDK.models.Passenger;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -31,15 +33,24 @@ public class SimpleHashMap {
             File file = new File("src/main/resources/passengers.json");  // Asegúrate de que el archivo esté en la ruta correcta.
             ObjectMapper mapper = new ObjectMapper();
 
+
             // Leer los registros del archivo JSON
             List<Passenger> passengers = mapper.readValue(file, new TypeReference<List<Passenger>>() {});
+            Collections.sort(passengers, Comparator.comparingInt(Passenger::getFamilyID));
 
-            // Proceso de agregar pasajeros al hashmap
+            Map<Integer, List<Passenger>> families = new HashMap<>();
+
             for (Passenger passenger : passengers) {
-                addToHashmap(passenger);
+                families.computeIfAbsent(passenger.getFamilyID(), k -> new ArrayList<>()).add(passenger);
             }
-            System.out.println(passengers.size());
+            for (List<Passenger> family : families.values()) {
+                List<Passenger> organizedFamily = organizeFamily(family);
 
+                // Asignar los pasajeros organizados a las cabinas
+                for (Passenger passenger : organizedFamily) {
+                    addToHashmap(passenger);
+                }
+            }
             printHashmapAndBuckets();
 
         } catch (IOException e) {
@@ -92,6 +103,40 @@ public class SimpleHashMap {
         }
     }
 
+    private static List<Passenger> organizeFamily(List<Passenger> family) {
+        List<Passenger> adults = new ArrayList<>();
+        List<Passenger> minors = new ArrayList<>();
+
+        // Separar mayores y menores de edad
+        for (Passenger passenger : family) {
+            if (passenger.getAge() >= 18) {
+                adults.add(passenger);
+            } else {
+                minors.add(passenger);
+            }
+        }
+
+        List<Passenger> organizedFamily = new ArrayList<>();
+        int i = 0, j = 0;
+
+        // Intercalar adultos y menores
+        while (i < adults.size() && j < minors.size()) {
+            organizedFamily.add(adults.get(i++));  // Agregar un mayor
+            organizedFamily.add(minors.get(j++));  // Agregar un menor
+        }
+
+        // Agregar los adultos restantes (si ya no hay más menores)
+        while (i < adults.size()) {
+            organizedFamily.add(adults.get(i++));
+        }
+
+        // Agregar los menores restantes (si ya no hay más adultos)
+        while (j < minors.size()) {
+            organizedFamily.add(minors.get(j++));
+        }
+
+        return organizedFamily;
+    }
     // Función para imprimir el contenido del hashmap y el estado de los buckets
     private static void printHashmapAndBuckets() {
         System.out.println("Hashmap Contents:");
@@ -99,7 +144,7 @@ public class SimpleHashMap {
             System.out.print("Bucket " + bucketIndex + ": ");
             List<Passenger> bucket = hashmap.get(bucketIndex);
             for (Passenger passenger : bucket) {
-                System.out.print(passenger.getFamilyID() + " ");  // Acceder directamente al nombre
+                System.out.print(passenger.getFamilyID());  // Acceder directamente al nombre
             }
             System.out.println();
         }
@@ -110,3 +155,5 @@ public class SimpleHashMap {
         }*/
     }
 }
+
+
