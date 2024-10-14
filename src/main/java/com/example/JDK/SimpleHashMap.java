@@ -14,9 +14,9 @@ import java.util.Map;
 
 public class SimpleHashMap {
 
-    private static final int NUM_BUCKETS = 500;
+    private static final int NUM_BUCKETS = 625;
     private int bucketActual = 0;
-    private static final int MAX_PASSENGERS_PER_BUCKET = 20;
+    private static final int MAX_PASSENGERS_PER_BUCKET = 16;
 
     // Inicializamos el hashmap con listas vacías para cada bucket
     private static Map<Integer, List<Passenger>> hashmap = new HashMap<>();
@@ -36,6 +36,7 @@ public class SimpleHashMap {
 
             // Leer los registros del archivo JSON
             List<Passenger> passengers = mapper.readValue(file, new TypeReference<List<Passenger>>() {});
+            //Orden
             Collections.sort(passengers, Comparator.comparingInt(Passenger::getFamilyID));
 
             Map<Integer, List<Passenger>> families = new HashMap<>();
@@ -141,10 +142,10 @@ public class SimpleHashMap {
     private static void printHashmapAndBuckets() {
         System.out.println("Hashmap Contents:");
         for (int bucketIndex : hashmap.keySet()) {
-            System.out.print("Bucket " + bucketIndex + ": ");
+            System.out.print("Cabina " + bucketIndex + ": ");
             List<Passenger> bucket = hashmap.get(bucketIndex);
             for (Passenger passenger : bucket) {
-                System.out.print(passenger.getFamilyID());  // Acceder directamente al nombre
+                System.out.print(passenger.getName()+" "+ passenger.getSurname()+" "+ passenger.getAge()+" "+ passenger.getFamilyID()+";");  // Acceder directamente al nombre
             }
             System.out.println();
         }
