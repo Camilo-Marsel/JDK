@@ -12,14 +12,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SimpleHashMap {
+public class Mod1RellenarPasajerosxCabinas {
 
     private static final int NUM_BUCKETS = 625;
-    private int bucketActual = 0;
     private static final int MAX_PASSENGERS_PER_BUCKET = 16;
 
     // Inicializamos el hashmap con listas vacías para cada bucket
-    private static Map<Integer, List<Passenger>> hashmap = new HashMap<>();
+    private static final Map<Integer, List<Passenger>> hashmap = new HashMap<>();
 
     static {
         for (int i = 0; i < NUM_BUCKETS; i++) {
