@@ -32,11 +32,8 @@ public class Mod1RellenarPasajerosxCabinas {
             File file = new File("src/main/resources/passengers.json");  // Asegúrate de que el archivo esté en la ruta correcta.
             ObjectMapper mapper = new ObjectMapper();
 
-
             // Leer los registros del archivo JSON
             List<Passenger> passengers = mapper.readValue(file, new TypeReference<List<Passenger>>() {});
-            //Orden
-            //Collections.sort(passengers, Comparator.comparingInt(Passenger::getFamilyID));
 
             Map<Integer, List<Passenger>> families = new HashMap<>();
 
@@ -151,10 +148,5 @@ public class Mod1RellenarPasajerosxCabinas {
             }
             System.out.println();
         }
-
-        /*System.out.println("\nBucket Table Status:");
-        for (int bucketIndex = 0; bucketIndex < NUM_BUCKETS; bucketIndex++) {
-            System.out.println("Bucket " + bucketIndex + ": " + (hashmap.get(bucketIndex).isEmpty() ? "Empty" : "Contains items"));
-        }*/
     }
 }
