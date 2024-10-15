@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class Mod1RellenarPasajerosxCabinas {
 
-    private static final int NUM_BUCKETS = 625;
-    private static final int MAX_PASSENGERS_PER_BUCKET = 16;
+    private static final int NUM_BUCKETS = 625; //definir matriz 25*25
+    private static final int MAX_PASSENGERS_PER_BUCKET = 16; //16 pasajeros por cabina
 
     // Inicializamos el hashmap con listas vacías para cada bucket
     private static final Map<Integer, List<Passenger>> hashmap = new HashMap<>();
@@ -36,13 +36,16 @@ public class Mod1RellenarPasajerosxCabinas {
             // Leer los registros del archivo JSON
             List<Passenger> passengers = mapper.readValue(file, new TypeReference<List<Passenger>>() {});
             //Orden
-            Collections.sort(passengers, Comparator.comparingInt(Passenger::getFamilyID));
+            //Collections.sort(passengers, Comparator.comparingInt(Passenger::getFamilyID));
 
             Map<Integer, List<Passenger>> families = new HashMap<>();
 
+            // Agrupar pasajeros por FamilyID
             for (Passenger passenger : passengers) {
                 families.computeIfAbsent(passenger.getFamilyID(), k -> new ArrayList<>()).add(passenger);
             }
+
+            // Organizar y agregar cada familia al hashmap
             for (List<Passenger> family : families.values()) {
                 List<Passenger> organizedFamily = organizeFamily(family);
 
