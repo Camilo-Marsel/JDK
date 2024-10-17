@@ -70,7 +70,8 @@ public class Mod1RellenarChainedHashTable {
             ObjectMapper mapper = new ObjectMapper();
 
             // Leer los registros del archivo JSON
-            List<Passenger> passengers = mapper.readValue(file, new TypeReference<List<Passenger>>() {});
+            List<Passenger> passengers = mapper.readValue(file, new TypeReference<>() {
+            });
 
             // Definir las funciones hash
             List<Function<Passenger, Integer>> hashFunctions = new ArrayList<>();

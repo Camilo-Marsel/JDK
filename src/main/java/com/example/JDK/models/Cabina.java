@@ -1,50 +1,43 @@
 package com.example.JDK.models;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class Cabina {
-    private int numero; // Identificador de la cabina
-    private int capacidadMaxima; // Número máximo de pasajeros por cabina
-    private List<Passenger> pasajeros; // Lista de pasajeros en la cabina
+    private int indiceCabina; // Índice de la cabina
+    private List<Passenger> pasajeros; // Lista de los 16 pasajeros en la cabina
+    private String estadoCabina; // Estado de la cabina ("Buen estado", "Cabina averiada", "Destruida")
 
     // Constructor
-    public Cabina(int numero, int capacidadMaxima) {
-        this.numero = numero;
-        this.capacidadMaxima = capacidadMaxima;
-        this.pasajeros = new ArrayList<>();
+    public Cabina(int indiceCabina, List<Passenger> pasajeros, String estadoCabina) {
+        this.indiceCabina = indiceCabina;
+        this.pasajeros = pasajeros;
+        this.estadoCabina = estadoCabina;
     }
 
-    // Método para agregar un pasajero a la cabina
-    public boolean agregarPasajero(Passenger pasajero) {
-        if (estaLlena()) {
-            return false; // Si la cabina está llena, no se puede agregar
-        }
-        pasajeros.add(pasajero);
-        return true;
+    // Getter y Setter para el índice de la cabina
+    public int getIndiceCabina() {
+        return indiceCabina;
     }
 
-    // Método para verificar si la cabina está llena
-    public boolean estaLlena() {
-        return pasajeros.size() >= capacidadMaxima;
+    public void setIndiceCabina(int indiceCabina) {
+        this.indiceCabina = indiceCabina;
     }
 
-    // Obtener la lista de pasajeros
+    // Getter y Setter para los pasajeros
     public List<Passenger> getPasajeros() {
         return pasajeros;
     }
 
-    // Obtener el número de la cabina
-    public int getNumero() {
-        return numero;
+    public void setPasajeros(List<Passenger> pasajeros) {
+        this.pasajeros = pasajeros;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Cabina ").append(numero).append(": ");
-        for (Passenger pasajero : pasajeros) {
-            sb.append(pasajero.getName()).append(" ").append(pasajero.getSurname()).append("; ");
-        }
-        return sb.toString();
+    // Getter y Setter para el estado de la cabina
+    public String getEstadoCabina() {
+        return estadoCabina;
+    }
+
+    public void setEstadoCabina(String estadoCabina) {
+        this.estadoCabina = estadoCabina;
     }
 }

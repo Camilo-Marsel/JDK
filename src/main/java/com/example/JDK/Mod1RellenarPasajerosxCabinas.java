@@ -1,7 +1,5 @@
 package com.example.JDK;
 
-import java.util.Collections;
-import java.util.Comparator;
 import com.example.JDK.models.Passenger;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,7 +32,6 @@ public class Mod1RellenarPasajerosxCabinas {
 
             // Leer los registros del archivo JSON
             List<Passenger> passengers = mapper.readValue(file, new TypeReference<List<Passenger>>() {});
-
             Map<Integer, List<Passenger>> families = new HashMap<>();
 
             // Agrupar pasajeros por FamilyID
